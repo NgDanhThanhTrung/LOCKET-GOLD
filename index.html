@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locket Gold Installer - Nguyễn Danh Thành Trung</title>
+    <title>Locket Gold Installer - Premium Unlock</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- 1. GLOBAL VARIABLES & RESET --- */
         :root {
             --primary: #fbbf24;
             --primary-dark: #d97706;
@@ -17,580 +16,293 @@
             --bg-gradient: radial-gradient(circle at 50% 0%, #1e1b4b, #030712);
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-blur: blur(20px);
             --text-main: #ffffff;
             --text-sub: #94a3b8;
-            --danger: #ef4444;
-            --success: #10b981;
-            --cyan: #00f2fe;
-            --radius-md: 16px;
-            --radius-lg: 24px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Be Vietnam Pro', sans-serif; }
-        
+
         body {
-            background: var(--bg-gradient);
+            background: var(--bg-dark);
+            background-image: var(--bg-gradient);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
             padding: 20px;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- 2. LAYOUT COMPONENTS --- */
-        .app-container {
+        .container {
             width: 100%;
             max-width: 600px;
+            margin: 0 auto;
             background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            margin-top: 20px;
-            margin-bottom: 80px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: relative;
+            border-radius: 28px;
+            padding: 25px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        header { text-align: center; margin-bottom: 35px; }
-        .logo-icon { font-size: 3.5rem; color: var(--cyan); margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4)); }
-        
-        .app-title { 
-            font-size: 1.6rem; 
-            font-weight: 800; 
-            background: linear-gradient(to right, #ffffff, var(--cyan)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin-bottom: 5px; 
-        }
-        
-        .app-desc { color: var(--text-sub); font-size: 0.95rem; }
-        .tag-role { 
-            display: inline-block; font-size: 0.75rem; 
-            background: rgba(0, 242, 254, 0.1); color: var(--cyan); 
-            padding: 4px 12px; border-radius: 20px; margin-top: 5px; border: 1px solid rgba(0, 242, 254, 0.3);
-        }
+        /* --- UI Components --- */
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: var(--primary); font-size: 2rem; text-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
 
-        /* --- 3. PLATFORM SELECTOR --- */
-        .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .platform-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-md);
-            padding: 25px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .platform-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); border-color: var(--cyan); }
-        .platform-card i { font-size: 2.5rem; margin-bottom: 12px; display: block; }
-        .platform-card.ios i { color: #fff; }
-        .platform-card.android i { color: #3ddc84; }
-        .platform-label { font-weight: 600; font-size: 1.1rem; }
-
-        /* --- 4. ACCORDION (THU GỌN) STYLES --- */
-        .accordion-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .accordion-header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
+        .badge {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 600;
-            background: rgba(255,255,255,0.02);
-            color: var(--text-sub);
+            border: 1px solid rgba(251, 191, 36, 0.2);
         }
-        .accordion-header:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .accordion-header i { transition: transform 0.3s ease; }
-        
-        .accordion-box.active .accordion-header {
-            color: var(--cyan);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .accordion-box.active .accordion-header i { transform: rotate(180deg); }
-        
-        .accordion-content {
-            display: none;
-            padding: 15px;
-            animation: fadeIn 0.3s ease;
-        }
-        .accordion-box.active .accordion-content { display: block; }
 
-        /* Support Box Specifics */
-        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px; }
-        .btn-social {
-            padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
-            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
-        }
-        .btn-zalo { background: #0068FF; color: #fff; }
-        .btn-tele { background: #26A5E4; color: #fff; }
-
-        /* --- 5. CONTENT SECTIONS --- */
-        .view-section { display: none; animation: fadeIn 0.4s ease-out; }
-        
-        .step-item {
-            background: rgba(0,0,0,0.2);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--cyan);
-        }
-        
-        .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-        .step-badge { background: var(--cyan); color: #000; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; }
-        .step-title { font-weight: 700; color: var(--cyan); font-size: 1.1rem; }
-        .step-desc { color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; margin-bottom: 15px; }
-
-        .media-placeholder {
-            width: 100%; height: auto;
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            border: 1px dashed var(--glass-border);
+        .section-title {
+            font-size: 1.1rem;
+            margin: 20px 0 15px;
             display: flex;
-            flex-direction: column;
-            justify-content: center; align-items: center;
-            color: var(--text-sub);
-            margin: 15px 0; overflow: hidden; position: relative;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
         }
-        .media-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--primary);
+        }
 
         .btn {
-            width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
-            font-weight: 700; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 8px;
-            text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            margin-top: 10px;
         }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .btn-primary { background: linear-gradient(90deg, var(--cyan), #2563eb); color: #fff; }
-        .btn-success { background: linear-gradient(90deg, #10b981, #059669); color: white; }
-        .btn-purple { background: linear-gradient(90deg, #8b5cf6, #6d28d9); color: white; }
-        .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-sub); width: auto; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; }
-        .btn-outline:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .btn-loadmore { background: rgba(255,255,255,0.08); color: #fff; margin-top: 15px; border: 1px dashed var(--glass-border); }
 
-        /* Account Cards */
+        .btn-primary { background: var(--primary); color: #000; }
+        .btn-primary:hover { transform: scale(1.02); background: var(--primary-dark); }
+
+        .note-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- ID Display Area --- */
         .id-card {
-            background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
-            border-radius: 12px; padding: 15px; margin-bottom: 15px; animation: fadeIn 0.5s;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
         }
-        .id-header { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 10px; color: var(--text-sub); }
-        .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block; margin-right: 5px; }
-        .status-offline { background: var(--danger); }
-        
-        .copy-box {
-            display: flex; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            border-radius: 8px; margin-bottom: 8px; overflow: hidden;
-        }
-        .copy-icon { width: 40px; display: flex; align-items: center; justify-content: center; color: var(--text-sub); background: rgba(255,255,255,0.02); border-right: 1px solid var(--glass-border); }
-        .copy-content { flex: 1; padding: 10px; font-family: 'Monaco', monospace; font-size: 0.9rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .copy-action { background: transparent; border: none; color: var(--cyan); width: 45px; cursor: pointer; border-left: 1px solid var(--glass-border); transition: 0.2s; }
-        .copy-action:hover { background: var(--cyan); color: #000; }
 
-        .donate-btn {
-            position: fixed; top: 25px; right: 25px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff; padding: 10px 18px; border-radius: 50px;
-            font-weight: 600; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: flex; align-items: center; gap: 8px; z-index: 100; transition: 0.3s;
-            text-decoration: none; font-size: 0.85rem;
+        .copy-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-top: 8px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
         }
-        .donate-btn i { color: #ff4757; animation: heartBeat 1.5s infinite; }
-        .donate-btn:hover { transform: translateY(3px) scale(1.05); background: rgba(255, 255, 255, 0.15); border-color: #ff4757; }
-        
-        @keyframes heartBeat { 0%, 70%, 100% { transform: scale(1); } 14% { transform: scale(1.3); } 28% { transform: scale(1); } 42% { transform: scale(1.3); } }
+
+        .copy-content { flex: 1; padding: 10px; font-family: monospace; font-size: 0.9rem; }
+        .copy-btn { background: var(--primary); border: none; padding: 0 15px; cursor: pointer; color: #000; }
+
+        .spinner {
+            width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--primary); border-radius: 50%;
+            animation: spin 1s linear infinite; margin: 20px auto; display: none;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } }
 
         .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
-            z-index: 999; display: none; justify-content: center; align-items: center; padding: 20px;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px;
         }
         .modal.active { display: flex; }
-        .modal-box {
-            background: #1e293b; width: 100%; max-width: 420px; padding: 30px; border-radius: 24px;
-            text-align: center; border: 1px solid var(--glass-border); position: relative;
-            animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .modal-icon { font-size: 3rem; margin-bottom: 15px; }
-        .modal h3 { font-size: 1.4rem; color: #fff; margin-bottom: 10px; }
-        .modal-list { text-align: left; margin: 15px 0 25px 0; color: var(--text-sub); list-style: none; }
-        .modal-list li { margin-bottom: 10px; display: flex; gap: 10px; }
-        .modal-list li i { color: var(--cyan); margin-top: 4px; }
-        .modal-media { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
-        .modal-media img { width: 100%; border-radius: 6px; object-fit: cover; }
-
-        #toast {
-            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
-            background: #334155; color: #fff; padding: 12px 24px; border-radius: 50px;
-            font-weight: 500; opacity: 0; visibility: hidden; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid var(--glass-border); z-index: 1000;
-        }
-        #toast.show { opacity: 1; visibility: visible; bottom: 100px; }
-        
-        .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--cyan); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 20px auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-content { background: #1e293b; padding: 30px; border-radius: 24px; max-width: 450px; text-align: center; border: 1px solid var(--glass-border); }
     </style>
 </head>
 <body>
 
-    <a href="https://ngdanhthanhtrung.github.io/Bank/" target="_blank" class="donate-btn">
-        <i class="fa-solid fa-heart"></i> <span>Donate</span>
-    </a>
+    <div class="container">
+        <div class="header">
+            <span class="badge">Version 2.0.1</span>
+            <h1 style="margin-top: 10px;">Locket Gold Installer</h1>
+            <p style="color: var(--text-sub); font-size: 0.9rem;">Giải pháp mở khóa Premium cho iOS & Android</p>
+        </div>
 
-    <div class="app-container">
-        <header>
-            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
-            <h1 class="app-title">Nguyễn Danh Thành Trung</h1>
-            <p class="app-desc">Locket Gold Installer Tool</p>
-            <div class="tag-role">Digital Creator & Developer</div>
-        </header>
+        <div class="note-card">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <strong>LƯU Ý QUAN TRỌNG:</strong> Tuyệt đối không đăng nhập Apple ID vào <b>iCloud</b> máy. Chỉ sử dụng trong <b>App Store</b>. Nếu vi phạm chúng tôi không chịu trách nhiệm.
+        </div>
 
-        <div id="view-home" class="platform-grid">
-            <div class="platform-card ios" onclick="nav.to('ios')">
-                <i class="fab fa-apple"></i>
-                <div class="platform-label">iPhone / iPad (iOS)</div>
-            </div>
-            <div class="platform-card android" onclick="nav.to('android')">
-                <i class="fab fa-android"></i>
-                <div class="platform-label">Android</div>
+        <div class="section-title"><i class="fa-solid fa-list-check"></i> Các bước cài đặt</div>
+        
+        <div class="guide-step">
+            <strong>Bước 1:</strong> Sao chép Apple ID và Mật khẩu ở danh sách bên dưới.
+        </div>
+        <div class="guide-step">
+            <strong>Bước 2:</strong> Mở App Store, đăng xuất tài khoản cũ và đăng nhập tài khoản vừa lấy.
+        </div>
+        <div class="guide-step">
+            <strong>Bước 3:</strong> Nhấn nút "Cài đặt trực tiếp" hoặc tải Shadowrocket để cấu hình Script Gold.
+        </div>
+
+        <a id="link-ota" href="#" class="btn btn-primary">
+            <i class="fa-solid fa-cloud-arrow-down"></i> Cài đặt trực tiếp Locket Gold
+        </a>
+
+        <div class="section-title"><i class="fa-solid fa-key"></i> Danh sách ID Apple</div>
+        
+        <div id="id-container">
+            <button id="btn-fetch" class="btn" style="background: rgba(255,255,255,0.1); color: #fff;" onclick="ui.showModal()">
+                Hiện danh sách ID Apple
+            </button>
+
+            <div id="id-area" style="display:none;">
+                <div id="loading-spinner" class="spinner"></div>
+                <div id="id-list"></div>
+                <button id="btn-loadmore" class="btn" style="background: rgba(255,255,255,0.05); color: var(--text-sub); display:none;" onclick="dataManager.loadMore()">
+                    Xem thêm tài khoản...
+                </button>
             </div>
         </div>
 
-        <section id="view-android" class="view-section">
-            <button class="btn btn-outline" onclick="nav.home()"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
-            <div class="accordion-box">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="support-header-text"><i class="fa-solid fa-headset"></i> Cần hỗ trợ cài đặt?</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-sub);">
-                        Liên hệ Trung qua các kênh sau để được support nhanh nhất:
-                    </div>
-                    <div class="social-grid">
-                        <a id="link-zalo-android" href="#" target="_blank" class="btn-social btn-zalo">
-                            <i class="fa-solid fa-comment-dots"></i> Zalo
-                        </a>
-                        <a id="link-tele-android" href="#" target="_blank" class="btn-social btn-tele">
-                            <i class="fab fa-telegram"></i> Telegram
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-header">
-                    <div class="step-badge">1</div>
-                    <div class="step-title">Tải File APK</div>
-                </div>
-                <div class="step-desc">Tải file cài đặt đã được mở khóa tính năng Locket Gold sẵn.</div>
-                <a href="https://drive.google.com/file/d/1bsEiGTNOdbVcpgXPZ9JUOPwQUmbCX0QE/view?usp=drive_link" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải APK Ngay</a>
-            </div>
-            <div class="step-item">
-                <div class="step-header">
-                    <div class="step-badge">2</div>
-                    <div class="step-title">Hướng dẫn cài đặt</div>
-                </div>
-                <div class="accordion-box" style="background: rgba(0,0,0,0.3); border:none; margin-bottom: 0;">
-                    <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 10px; border-radius: 8px;">
-                        <span>Xem chi tiết hướng dẫn</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="step-desc">Mở file vừa tải và chọn "Cài đặt". Nếu máy hỏi quyền, hãy chọn <strong>Cho phép từ nguồn này</strong>.</div>
-                        <div class="media-placeholder">
-                            <img src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2023/11/app-apk-7.jpg.webp">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-ios" class="view-section">
-            <button class="btn btn-outline" onclick="nav.home()"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
-
-            <div class="accordion-box">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="support-header-text"><i class="fa-solid fa-headset"></i> Cần hỗ trợ cài đặt?</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-sub);">
-                        Liên hệ Trung qua các kênh sau để được support nhanh nhất:
-                    </div>
-                    <div class="social-grid">
-                        <a id="link-zalo-ios" href="#" target="_blank" class="btn-social btn-zalo">
-                            <i class="fa-solid fa-comment-dots"></i> Zalo
-                        </a>
-                        <a id="link-tele-ios" href="#" target="_blank" class="btn-social btn-tele">
-                            <i class="fab fa-telegram"></i> Telegram
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="step-item">
-                <div class="step-header">
-                    <div class="step-badge">1</div>
-                    <div class="step-title">Cài đặt Shadowrocket & ID Apple</div>
-                </div>
-                <div class="accordion-box" style="margin-bottom: 20px;">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <div style="font-weight: bold; color: var(--success);"><i class="fa-solid fa-bolt"></i> Cách 1: Cài Nhanh (OTA)</div>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="step-desc" style="font-size: 0.9rem;">Thử cài Shadowrocket trực tiếp không cần ID Apple.</div>
-                        <a href="itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/shadowrocket/manifest.plist" class="btn btn-purple" style="margin-bottom: 10px;">
-                            <i class="fa-solid fa-rocket"></i> Cài Shadowrocket
-                        </a>
-                        <div style="font-size: 0.8rem; color: #fca5a5; font-style: italic;">
-                            *Lưu ý: Có thể không tương thích với một số máy. Nếu lỗi, hãy dùng Cách 2 bên dưới.
-                        </div>
-                    </div>
-                </div>
-
-                <div style="border-top: 1px solid var(--glass-border); padding-top: 20px;">
-                    <div style="font-weight: bold; color: var(--cyan); margin-bottom: 5px;"><i class="fa-brands fa-apple"></i> Cách 2: Dùng ID Apple chung</div>
-                    <div class="step-desc">
-                        Sử dụng tài khoản dưới đây để tải từ <strong>App Store</strong> (Tuyệt đối KHÔNG đăng nhập iCloud trong Cài đặt).
-                    </div>
-                    <div id="id-area" style="display:none;">
-                        <div id="loading-spinner" class="spinner"></div>
-                        <div id="id-list"></div>
-                        <button id="btn-loadmore" class="btn btn-loadmore" onclick="dataManager.loadMore()">
-                            Xem thêm tài khoản <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </div>
-                    <button id="btn-fetch" class="btn btn-primary" onclick="ui.openModal('warning-modal')">
-                        <i class="fa-solid fa-key"></i> Lấy Danh Sách ID
-                    </button>
-                </div>
-            </div>
-
-            <div class="step-item">
-                <div class="step-header">
-                    <div class="step-badge">2</div>
-                    <div class="step-title">Đăng Nhập Vào AppStore</div>
-                </div>
-                <div class="accordion-box" style="background: rgba(0,0,0,0.3); border:none; margin-bottom: 0;">
-                    <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 10px; border-radius: 8px;">
-                        <span>Xem chi tiết các bước </span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="step-desc">Vào Appsore, chọn vào phần <strong>Tài Khoản</strong> (Góc Trên Bên Phải)</div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/nMv5sksY/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-1.png"></div>
-                        
-                        <div class="step-desc">Kéo xuống dưới cùng, chọn <strong>Đăng Xuất</strong></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/ht51xBc/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-2.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/xtBgj5QJ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-3.png"></div>
-                        
-                        <div class="step-desc">Sau đó kéo lại lên trên cùng và đăng nhập tài khoản bạn vừa lấy.</div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/7J4WbZ3k/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-6.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/k65SYDs5/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-7.png"></div>
-                        
-                        <div class="step-desc">Tìm ứng dụng <strong>Shadowrocket</strong></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="step-item">
-                <div class="step-header">
-                    <div class="step-badge">3</div>
-                    <div class="step-title">Cấu hình Shadowrocket</div>
-                </div>
-                <div class="accordion-box" style="background: rgba(0,0,0,0.3); border:none; margin-bottom: 0;">
-                    <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 10px; border-radius: 8px;">
-                        <span>Xem chi tiết cấu hình</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="step-desc">Sau khi đã tải thành công, bạn hãy vào app <strong>Shadowrocket</strong></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/zWHwS7DK/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-12.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/wF7xpHz6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-13.png"></div>
-                        <div class="step-desc">
-                            Copy link sau và dán vào: <strong style="cursor:pointer; color: var(--cyan); text-decoration: underline;" onclick="ui.copy('https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule')">Nhấn vào đây để copy link</strong>
-                        </div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/DPx7hvj6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-15.png"></div>
-                        <div class="step-desc">Chọn vào chữ <strong>i</strong> của <strong>Locket_obh.conf</strong> -> Chọn mục <strong>Giải mã HTTPS</strong> -> Bật lên.</div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/1t56qPZX/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-16.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/nN7gy68C/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-19.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/8ChCvxj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-20.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/v6xkfSsZ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-24.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/pBqMvkwM/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-28.png"></div>
-                        <div class="media-placeholder"><img src="https://i.ibb.co/FbWLmDsp/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-30.png"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="step-item">
-                <div class="step-header">
-                    <div class="step-badge">4</div>
-                    <div class="step-title">Hạ cấp Locket</div>
-                </div>
-                <div class="step-desc">Sau khi bật VPN Shadowrocket, bạn đã có thể dùng Gold, tuy nhiên để tránh việc bạn luôn phải bật Shadowrocket thì bạn có thể cài bản Locket hạ cấp</div>
-                <div style="font-size: 0.8rem; color: #fca5a5; font-style: italic;">*Lưu ý: Contact với mình để được hướng dẫn hạ cấp Locket (có phí), nếu bạn không có nhu cầu có thể bỏ qua bước này vẫn sẽ dùng Locket một cách bình thường, khi cài bạn sẽ được tặng kèm thêm app Rổ Phim free nhé!</div>
-                <a id="link-ota" href="#" class="btn btn-success">
-                    <i class="fa-solid fa-cloud-arrow-down"></i> Cài Đặt Locket
-                </a>
-                <a href="itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/rophim/manifest.plist" class="btn btn-purple" style="margin-bottom: 10px;">
-                    <i class="fa-solid fa-rocket"></i> Cài Đặt Rổ Phim
-                </a>
-            </div>
-        </section>
+        <div style="text-align: center; margin-top: 30px; font-size: 0.8rem; color: var(--text-sub);">
+            Design by <strong>Nguyễn Danh Thành Trung</strong>
+        </div>
     </div>
 
     <div id="warning-modal" class="modal">
-        <div class="modal-box">
-            <div class="modal-icon" style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <h3>CẢNH BÁO QUAN TRỌNG</h3>
-            <div class="modal-media">
-                <img src="https://i.ibb.co/m5KNtrjh/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-39.png">
-                <img src="https://i.ibb.co/b5cH5J5m/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-10.png">
-                <img src="https://i.ibb.co/gbBp1TLm/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-11.png">
-            </div>
-            <ul class="modal-list">
-                <li><i class="fa-solid fa-check"></i> Chỉ đăng nhập trong <strong>App Store</strong>.</li>
-                <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> KHÔNG đăng nhập iCloud trong Cài đặt.</li>
-                <li><i class="fa-solid fa-shield"></i> Nếu hỏi nâng cấp bảo mật → Chọn "Các Lựa Chọn Khác" → "Không Nâng Cấp".</li>
-            </ul>
-            <button class="btn btn-primary" onclick="dataManager.fetchIDs()">Tôi đồng ý</button>
-            <button class="btn btn-outline" style="margin-top:10px; width:100%; border:none;" onclick="ui.closeModal('warning-modal')">Huỷ bỏ</button>
+        <div class="modal-content">
+            <i class="fa-solid fa-shield-halved" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h2>Xác nhận an toàn</h2>
+            <p style="margin: 15px 0 25px; color: var(--text-sub); font-size: 0.95rem;">Tôi cam kết chỉ đăng nhập vào <b>App Store</b> và chịu trách nhiệm với hành động của mình.</p>
+            <button class="btn btn-primary" onclick="dataManager.fetchIDs()">Tôi đồng ý và xem ID</button>
+            <button class="btn" style="background:transparent; color: #94a3b8;" onclick="ui.closeModal()">Hủy bỏ</button>
         </div>
     </div>
 
-    <div id="toast"><i class="fa-solid fa-check-circle"></i> Đã sao chép vào bộ nhớ tạm!</div>
-
     <script>
         const CONFIG = {
-            zalo_link: "https://zalo.me/0981506719", 
-            tele_link: "https://t.me/NgDanhThanhTrung",
-            insta_link: "https://instagram.com/ttrungisme.bi",
-            tiktok_link: "https://www.tiktok.com/@thanhtrungnguyendanh",
-            ota_locket_link: "itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/locket/manifest.plist",
-            api_url: "https://id.atvno1.io.vn/api/accounts" // Giữ nguyên API nguồn từ code trước
+            workerUrl: 'https://locket.levanquocht21.workers.dev/', 
+            otaUrl: 'itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/manifest.plist',
+            itemsPerBatch: 2
         };
 
-        const nav = {
-            to(viewId) {
-                document.getElementById('view-home').style.display = 'none';
-                document.querySelectorAll('.view-section').forEach(s => s.style.display = 'none');
-                document.getElementById(`view-${viewId}`).style.display = 'block';
-                window.scrollTo(0, 0);
-            },
-            home() {
-                document.querySelectorAll('.view-section').forEach(s => s.style.display = 'none');
-                document.getElementById('view-home').style.display = 'grid';
-            }
-        };
+        document.getElementById('link-ota').href = CONFIG.otaUrl;
 
         const ui = {
-            openModal(id) { document.getElementById(id).classList.add('active'); },
-            closeModal(id) { document.getElementById(id).classList.remove('active'); },
-            showToast(msg) {
-                const t = document.getElementById('toast');
-                t.innerHTML = `<i class="fa-solid fa-check-circle"></i> ${msg}`;
-                t.classList.add('show');
-                setTimeout(() => t.classList.remove('show'), 2500);
-            },
-            copy(text) {
-                navigator.clipboard.writeText(text).then(() => this.showToast("Đã sao chép vào bộ nhớ tạm!"));
+            showModal: () => document.getElementById('warning-modal').classList.add('active'),
+            closeModal: () => document.getElementById('warning-modal').classList.remove('active'),
+            copy: (text) => {
+                navigator.clipboard.writeText(text);
+                alert("Đã chép: " + text);
             }
         };
 
         const dataManager = {
-            allIDs: [],
-            displayCount: 2,
+            allAccounts: [],
+            currentShown: 0,
 
-            async fetchIDs() {
-                ui.closeModal('warning-modal');
+            fetchIDs: async () => {
+                ui.closeModal();
                 document.getElementById('btn-fetch').style.display = 'none';
                 document.getElementById('id-area').style.display = 'block';
                 document.getElementById('loading-spinner').style.display = 'block';
-                
+
                 try {
-                    const response = await fetch(CONFIG.api_url);
-                    const data = await response.json();
-                    if(data && data.length > 0) {
-                        this.allIDs = data;
-                    } else {
-                        throw new Error("Empty API");
-                    }
-                    this.render();
-                } catch (err) {
-                    console.error("Lỗi lấy ID:", err);
-                    // Dữ liệu Mock từ code trước (VannQuoc)
-                    this.allIDs = [
-                        { login: "appleid.shared01@gmail.com", pass: "VannQuoc@2024", status: "online" },
-                        { login: "locketgold.free@icloud.com", pass: "HappyNewYear2025", status: "offline" }
-                    ];
-                    this.render();
+                    const res = await fetch(CONFIG.workerUrl);
+                    const html = await res.text();
+                    dataManager.parseData(html);
+                } catch (e) {
+                    document.getElementById('id-list').innerHTML = `<p style="text-align:center; padding:20px;">Không thể tải dữ liệu. Vui lòng thử lại!</p>`;
                 } finally {
                     document.getElementById('loading-spinner').style.display = 'none';
                 }
             },
 
-            render() {
-                const list = document.getElementById('id-list');
-                list.innerHTML = "";
-                const show = this.allIDs.slice(0, this.displayCount);
+            parseData: (html) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const cards = doc.querySelectorAll('main div.bg-white.rounded-2xl');
                 
-                show.forEach(item => {
-                    list.innerHTML += `
+                cards.forEach((card, i) => {
+                    let email = "N/A";
+                    const uSpan = card.querySelector('span[id^="user_"]');
+                    if (uSpan) {
+                        const cf = uSpan.querySelector('.__cf_email__');
+                        email = cf ? dataManager.decodeCF(cf.getAttribute('data-cfemail')) : uSpan.innerText.trim();
+                    }
+
+                    let pass = "N/A";
+                    const pSpan = card.querySelector('span[id*="pass"]');
+                    if (pSpan) pass = pSpan.innerText.trim();
+
+                    const isLive = card.innerText.includes("Hoạt động");
+                    dataManager.allAccounts.push({ email, pass, isLive, index: i + 1 });
+                });
+
+                dataManager.loadMore();
+            },
+
+            loadMore: () => {
+                const container = document.getElementById('id-list');
+                const nextBatch = dataManager.allAccounts.slice(dataManager.currentShown, dataManager.currentShown + CONFIG.itemsPerBatch);
+                
+                nextBatch.forEach(acc => {
+                    const html = `
                         <div class="id-card">
-                            <div class="id-header">
-                                <span><span class="status-dot ${item.status === 'offline' ? 'status-offline' : ''}"></span>${item.status.toUpperCase()}</span>
-                                <span>ID Apple Miễn Phí</span>
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <span style="font-size:0.8rem; font-weight:bold;">ID #${acc.index}</span>
+                                <span style="font-size:0.75rem; color:${acc.isLive ? '#10b981' : '#ef4444'}">● ${acc.isLive ? 'Online' : 'Bảo trì'}</span>
                             </div>
                             <div class="copy-box">
-                                <div class="copy-icon"><i class="fa-solid fa-user"></i></div>
-                                <div class="copy-content">${item.login}</div>
-                                <button class="copy-action" onclick="ui.copy('${item.login}')"><i class="fa-solid fa-copy"></i></button>
+                                <div class="copy-content">${acc.email}</div>
+                                <button class="copy-btn" onclick="ui.copy('${acc.email}')"><i class="fa-solid fa-copy"></i></button>
                             </div>
                             <div class="copy-box">
-                                <div class="copy-icon"><i class="fa-solid fa-lock"></i></div>
-                                <div class="copy-content">${item.pass}</div>
-                                <button class="copy-action" onclick="ui.copy('${item.pass}')"><i class="fa-solid fa-copy"></i></button>
+                                <div class="copy-content">${acc.pass}</div>
+                                <button class="copy-btn" onclick="ui.copy('${acc.pass}')"><i class="fa-solid fa-copy"></i></button>
                             </div>
                         </div>
                     `;
+                    container.insertAdjacentHTML('beforeend', html);
                 });
-                // Logic ẩn hiện nút loadmore
-                if (this.displayCount >= this.allIDs.length) {
-                    document.getElementById('btn-loadmore').style.display = 'none';
-                } else {
-                    document.getElementById('btn-loadmore').style.display = 'block';
-                }
+
+                dataManager.currentShown += nextBatch.length;
+                document.getElementById('btn-loadmore').style.display = 
+                    (dataManager.currentShown >= dataManager.allAccounts.length) ? 'none' : 'block';
             },
 
-            loadMore() {
-                this.displayCount += 2;
-                this.render();
+            decodeCF: (str) => {
+                let e = "", r = parseInt(str.substr(0, 2), 16);
+                for (let n = 2; n < str.length; n += 2) {
+                    let c = parseInt(str.substr(n, 2), 16) ^ r;
+                    e += String.fromCharCode(c);
+                }
+                return e;
             }
-        };
-
-        function toggleAccordion(header) {
-            header.parentElement.classList.toggle('active');
-        }
-
-        window.onload = () => {
-            ['link-zalo-android', 'link-zalo-ios'].forEach(id => document.getElementById(id).href = CONFIG.zalo_link);
-            ['link-tele-android', 'link-tele-ios'].forEach(id => document.getElementById(id).href = CONFIG.tele_link);
-            document.getElementById('link-ota').href = CONFIG.ota_locket_link;
         };
     </script>
 </body>
