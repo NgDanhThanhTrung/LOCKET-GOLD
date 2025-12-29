@@ -43,7 +43,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- UI Components --- */
         .header { text-align: center; margin-bottom: 30px; }
         .header h1 { color: var(--primary); font-size: 2rem; text-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
 
@@ -103,37 +102,6 @@
             margin-bottom: 20px;
         }
 
-        /* --- ID Display Area --- */
-        .id-card {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .copy-box {
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            margin-top: 8px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-        }
-
-        .copy-content { flex: 1; padding: 10px; font-family: monospace; font-size: 0.9rem; }
-        .copy-btn { background: var(--primary); border: none; padding: 0 15px; cursor: pointer; color: #000; }
-
-        .spinner {
-            width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--primary); border-radius: 50%;
-            animation: spin 1s linear infinite; margin: 20px auto; display: none;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } }
-
         .modal {
             position: fixed; inset: 0; background: rgba(0,0,0,0.85);
             display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px;
@@ -153,40 +121,30 @@
 
         <div class="note-card">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            <strong>LƯU Ý QUAN TRỌNG:</strong> Tuyệt đối không đăng nhập Apple ID vào <b>iCloud</b> máy. Chỉ sử dụng trong <b>App Store</b>. Nếu vi phạm chúng tôi không chịu trách nhiệm.
+            <strong>LƯU Ý QUAN TRỌNG:</strong> Tuyệt đối không đăng nhập Apple ID vào <b>iCloud</b> máy. Chỉ sử dụng trong <b>App Store</b>.
         </div>
 
         <div class="section-title"><i class="fa-solid fa-list-check"></i> Các bước cài đặt</div>
         
         <div class="guide-step">
-            <strong>Bước 1:</strong> Sao chép Apple ID và Mật khẩu ở danh sách bên dưới.
+            <strong>Bước 1:</strong> Nhấn nút bên dưới để lấy danh sách Apple ID và Mật khẩu.
         </div>
         <div class="guide-step">
             <strong>Bước 2:</strong> Mở App Store, đăng xuất tài khoản cũ và đăng nhập tài khoản vừa lấy.
         </div>
         <div class="guide-step">
-            <strong>Bước 3:</strong> Nhấn nút "Cài đặt trực tiếp" hoặc tải Shadowrocket để cấu hình Script Gold.
+            <strong>Bước 3:</strong> Quay lại đây nhấn "Cài đặt trực tiếp" để hoàn tất.
         </div>
 
-        <a id="link-ota" href="#" class="btn btn-primary">
+        <a href="itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/manifest.plist" class="btn btn-primary">
             <i class="fa-solid fa-cloud-arrow-down"></i> Cài đặt trực tiếp Locket Gold
         </a>
 
-        <div class="section-title"><i class="fa-solid fa-key"></i> Danh sách ID Apple</div>
+        <div class="section-title"><i class="fa-solid fa-key"></i> Tài khoản ID Apple</div>
         
-        <div id="id-container">
-            <button id="btn-fetch" class="btn" style="background: rgba(255,255,255,0.1); color: #fff;" onclick="ui.showModal()">
-                Hiện danh sách ID Apple
-            </button>
-
-            <div id="id-area" style="display:none;">
-                <div id="loading-spinner" class="spinner"></div>
-                <div id="id-list"></div>
-                <button id="btn-loadmore" class="btn" style="background: rgba(255,255,255,0.05); color: var(--text-sub); display:none;" onclick="dataManager.loadMore()">
-                    Xem thêm tài khoản...
-                </button>
-            </div>
-        </div>
+        <button class="btn" style="background: rgba(255,255,255,0.1); color: #fff;" onclick="toggleModal(true)">
+            Lấy danh sách ID Apple
+        </button>
 
         <div style="text-align: center; margin-top: 30px; font-size: 0.8rem; color: var(--text-sub);">
             Design by <strong>Nguyễn Danh Thành Trung</strong>
@@ -198,112 +156,23 @@
             <i class="fa-solid fa-shield-halved" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
             <h2>Xác nhận an toàn</h2>
             <p style="margin: 15px 0 25px; color: var(--text-sub); font-size: 0.95rem;">Tôi cam kết chỉ đăng nhập vào <b>App Store</b> và chịu trách nhiệm với hành động của mình.</p>
-            <button class="btn btn-primary" onclick="dataManager.fetchIDs()">Tôi đồng ý và xem ID</button>
-            <button class="btn" style="background:transparent; color: #94a3b8;" onclick="ui.closeModal()">Hủy bỏ</button>
+            <button class="btn btn-primary" onclick="goToExternalLink()">Tôi đồng ý và xem ID</button>
+            <button class="btn" style="background:transparent; color: #94a3b8;" onclick="toggleModal(false)">Hủy bỏ</button>
         </div>
     </div>
 
     <script>
-        const CONFIG = {
-            workerUrl: 'https://locket.levanquocht21.workers.dev/', 
-            otaUrl: 'itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/manifest.plist',
-            itemsPerBatch: 2
-        };
+        const REDIRECT_URL = 'https://locket.levanquocht21.workers.dev/';
 
-        document.getElementById('link-ota').href = CONFIG.otaUrl;
+        function toggleModal(show) {
+            const modal = document.getElementById('warning-modal');
+            show ? modal.classList.add('active') : modal.classList.remove('active');
+        }
 
-        const ui = {
-            showModal: () => document.getElementById('warning-modal').classList.add('active'),
-            closeModal: () => document.getElementById('warning-modal').classList.remove('active'),
-            copy: (text) => {
-                navigator.clipboard.writeText(text);
-                alert("Đã chép: " + text);
-            }
-        };
-
-        const dataManager = {
-            allAccounts: [],
-            currentShown: 0,
-
-            fetchIDs: async () => {
-                ui.closeModal();
-                document.getElementById('btn-fetch').style.display = 'none';
-                document.getElementById('id-area').style.display = 'block';
-                document.getElementById('loading-spinner').style.display = 'block';
-
-                try {
-                    const res = await fetch(CONFIG.workerUrl);
-                    const html = await res.text();
-                    dataManager.parseData(html);
-                } catch (e) {
-                    document.getElementById('id-list').innerHTML = `<p style="text-align:center; padding:20px;">Không thể tải dữ liệu. Vui lòng thử lại!</p>`;
-                } finally {
-                    document.getElementById('loading-spinner').style.display = 'none';
-                }
-            },
-
-            parseData: (html) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const cards = doc.querySelectorAll('main div.bg-white.rounded-2xl');
-                
-                cards.forEach((card, i) => {
-                    let email = "N/A";
-                    const uSpan = card.querySelector('span[id^="user_"]');
-                    if (uSpan) {
-                        const cf = uSpan.querySelector('.__cf_email__');
-                        email = cf ? dataManager.decodeCF(cf.getAttribute('data-cfemail')) : uSpan.innerText.trim();
-                    }
-
-                    let pass = "N/A";
-                    const pSpan = card.querySelector('span[id*="pass"]');
-                    if (pSpan) pass = pSpan.innerText.trim();
-
-                    const isLive = card.innerText.includes("Hoạt động");
-                    dataManager.allAccounts.push({ email, pass, isLive, index: i + 1 });
-                });
-
-                dataManager.loadMore();
-            },
-
-            loadMore: () => {
-                const container = document.getElementById('id-list');
-                const nextBatch = dataManager.allAccounts.slice(dataManager.currentShown, dataManager.currentShown + CONFIG.itemsPerBatch);
-                
-                nextBatch.forEach(acc => {
-                    const html = `
-                        <div class="id-card">
-                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                                <span style="font-size:0.8rem; font-weight:bold;">ID #${acc.index}</span>
-                                <span style="font-size:0.75rem; color:${acc.isLive ? '#10b981' : '#ef4444'}">● ${acc.isLive ? 'Online' : 'Bảo trì'}</span>
-                            </div>
-                            <div class="copy-box">
-                                <div class="copy-content">${acc.email}</div>
-                                <button class="copy-btn" onclick="ui.copy('${acc.email}')"><i class="fa-solid fa-copy"></i></button>
-                            </div>
-                            <div class="copy-box">
-                                <div class="copy-content">${acc.pass}</div>
-                                <button class="copy-btn" onclick="ui.copy('${acc.pass}')"><i class="fa-solid fa-copy"></i></button>
-                            </div>
-                        </div>
-                    `;
-                    container.insertAdjacentHTML('beforeend', html);
-                });
-
-                dataManager.currentShown += nextBatch.length;
-                document.getElementById('btn-loadmore').style.display = 
-                    (dataManager.currentShown >= dataManager.allAccounts.length) ? 'none' : 'block';
-            },
-
-            decodeCF: (str) => {
-                let e = "", r = parseInt(str.substr(0, 2), 16);
-                for (let n = 2; n < str.length; n += 2) {
-                    let c = parseInt(str.substr(n, 2), 16) ^ r;
-                    e += String.fromCharCode(c);
-                }
-                return e;
-            }
-        };
+        function goToExternalLink() {
+            window.open(REDIRECT_URL, '_blank');
+            toggleModal(false);
+        }
     </script>
 </body>
 </html>
